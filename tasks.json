@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Проект А",
+    "target": 100,
+    "completed": 30,
+    "expanded": false,
+    "subtasks": [
+      {
+        "title": "Анализ требова0",
+        "target": 30,
+        "completed": 20
+      },
+      {
+        "title": "Проектирование",
+        "target": 40,
+        "completed": 10
+      },
+      {
+        "title": "Тестирование",
+        "target": 30,
+        "completed": 0
+      }
+    ]
+  },
+  {
+    "title": "Проект Б",
+    "target": 80,
+    "completed": 10,
+    "expanded": false,
+    "subtasks": [
+      {
+        "title": "Исследование",
+        "target": 40,
+        "completed": 10
+      },
+      {
+        "title": "Разработка",
+        "target": 40,
+        "completed": 0
+      }
+    ]
+  }
+]
