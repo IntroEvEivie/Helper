@@ -1,23 +1,28 @@
 [
   {
     "title": "Проект А",
-    "target": 100,
+    "target": 110,
     "completed": 30,
     "expanded": false,
     "subtasks": [
       {
-        "title": "Анализ требова0",
+        "title": "Анализ требова03223343",
         "target": 30,
         "completed": 20
       },
       {
-        "title": "Проектирование",
+        "title": "Проектирование32",
         "target": 40,
         "completed": 10
       },
       {
         "title": "Тестирование",
         "target": 30,
+        "completed": 0
+      },
+      {
+        "title": "Новая подзадача",
+        "target": 10,
         "completed": 0
       }
     ]
@@ -26,10 +31,10 @@
     "title": "Проект Б",
     "target": 80,
     "completed": 10,
-    "expanded": false,
+    "expanded": true,
     "subtasks": [
       {
-        "title": "Исследование",
+        "title": "Исследование343",
         "target": 40,
         "completed": 10
       },

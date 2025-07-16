@@ -4,8 +4,9 @@ import threading
 import json
 import subprocess
 from datetime import datetime, time
-import pygame
+import pygame, ctypes
 from pygame.locals import *
+
 
 # Конфиг рабочего дня и перерывов
 WORK_START = time(8, 30)
@@ -18,13 +19,14 @@ BREAKS     = [
 ]
 
 # Цвета
-COLOR_WORKED    = (50, 205, 50)
-COLOR_REMAINING = (40, 40, 40)
+COLOR_WORKED    = (50, 205, 50)  # Прогрессбар дня (отработано) (0x11, 0x13, 0x17) (0x4A, 0xFF, 0x87) (250, 205, 50) #24F2BFFF #2F2F2F
+COLOR_REMAINING = (0x1E, 0x1F, 0x22) # #1E1F22(40, 40, 40)
 COLOR_BREAK     = (255, 140, 0)
 COLOR_CURRENT   = (220, 20, 60)
 COLOR_BG        = (20, 20, 20)
 COLOR_GRID      = (60, 60, 60)
 COLOR_BTN       = (100, 100, 100)
+COLOR_BTN_DARK  = (0x1B, 0x1D, 0x23)
 COLOR_BTN_HL    = (150, 150, 150)
 COLOR_TEXT      = (200, 200, 200)
 COLOR_PANEL     = (50, 50, 70)
@@ -33,8 +35,8 @@ COLOR_PROGRESS_FG = (70, 130, 180)
 COLOR_SCROLLBAR = (100, 100, 120)
 
 # Размеры
-WINDOW_SIZE = 350
-PIXEL_SIZE  = 175
+WINDOW_SIZE = 350 # 350
+PIXEL_SIZE  = 175 # 175
 ICON_SIZE   = 25   # размер окна при «сворачивании»
 APP_ICON_SIZE = 64 # размер иконок приложений
 TASK_ITEM_HEIGHT = 60
@@ -299,20 +301,20 @@ def draw_main_screen(surface):
     # Если окно свернуто, рисуем кнопку восстановления
     if is_minimized:
         restore_btn = pygame.Rect(0, 0, ICON_SIZE, ICON_SIZE)
-        pygame.draw.rect(surface, COLOR_BTN, restore_btn)
+        pygame.draw.rect(surface, COLOR_BTN_DARK, restore_btn)
         restore_text = font = pygame.font.SysFont(None, 24).render("_", True, COLOR_TEXT)
         surface.blit(restore_text, (restore_btn.x + 5, restore_btn.y + 2))
         return restore_btn
 
     size = PIXEL_SIZE
     off = (surface.get_width() - size) // 2
-
+    """
     # Сетка
     step = size // 5
     for i in range(0, size + 1, step):
         pygame.draw.line(surface, COLOR_GRID, (off, off + i), (off + size, off + i), 1)
         pygame.draw.line(surface, COLOR_GRID, (off + i, off), (off + i, off + size), 1)
-
+        """
     # Пиксели
     for y in range(size):
         for x in range(size):
@@ -330,7 +332,7 @@ def draw_main_screen(surface):
             if pos == current_second:
                 c = COLOR_CURRENT
 
-            surface.set_at((off + x, off + y + 40), c)
+            surface.set_at((off + x, off + y), c)
 
     # Время
     font = pygame.font.SysFont(None, 24)
@@ -800,6 +802,8 @@ def main():
                 max_scroll = max(0, scroll_content_height - (WINDOW_SIZE - 40))
                 scroll_offset = max(0, min(scroll_offset, max_scroll))
 
+                # Где «кликнуть» внутри окна (координаты относительно левого верхнего угла)
+                # ctypes.windll.user32.SetForegroundWindow(screen)
             # Ввод текста в диалоге редактирования
             elif event.type == pygame.KEYDOWN and editing_task is not None:
                 if event.key == pygame.K_RETURN:

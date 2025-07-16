@@ -1,0 +1,27 @@
+{
+  "apps": [
+    {
+      "name": "Блокнот",
+      "path": "notepad.exe",
+      "icon": null,
+      "icon_surface": null
+    },
+    {
+      "name": "Калькулятор",
+      "path": "calc.exe",
+      "icon": null,
+      "icon_surface": null
+    },
+    {
+      "name": "Проводник",
+      "path": "explorer.exe",
+      "icon": null,
+      "icon_surface": null
+    },
+    {
+      "name": "Приложение 4",
+      "path": "",
+      "icon": null
+    }
+  ]
+}
